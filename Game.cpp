@@ -1,8 +1,8 @@
 #include "Game.hpp"
 
-//Static functions
+//Funciones Static
 
-//Initializer functions
+//Funciones de inicialización
 void Game::initWindow()
 {
     /* Crea una ventana SFML usando opciones de un fichero window.ini */
@@ -21,6 +21,7 @@ Game::~Game()
     delete this->window;
 }
 
+// Funciones
 void Game::updateSFMLEvents()
 {
     while (this->window->pollEvent(this->sfEvent))
@@ -35,6 +36,8 @@ void Game::updateSFMLEvents()
 void Game::update()
 {
     this->updateSFMLEvents();
+
+
 }
 
 void Game::render()
@@ -49,7 +52,17 @@ void Game::run()
 {
     while (this->window->isOpen())
     {
+
+        this->updateDt();
         this->update();
         this->render();
     }
+}
+
+void Game::updateDt()
+{
+    /*Actualiza la variable dt con el tiempo que toma hacer update y render en un frame*/
+    this->dt = this->dtClock.restart().asSeconds();
+
+
 }
