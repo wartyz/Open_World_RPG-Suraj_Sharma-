@@ -1,14 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-
-#include "SFML/System.hpp"
-#include "SFML/Window.hpp"
-#include "SFML/Graphics.hpp"
-#include "SFML/Audio.hpp"
-#include "SFML/Network.hpp"
+#include "State.hpp"
 
 class Game
 {
@@ -17,13 +9,20 @@ private:
     sf::RenderWindow *window;
     sf::Event sfEvent;
 
-    //Initialization
+    sf::Clock dtClock;
+    float dt; //Delta Time
+
+    //Initializacion
     void initWindow();
 
 public:
+    //Constructores/Destructores
     Game();
 
     virtual ~Game();
+
+    //Funciones
+    void updateDt();
 
     void updateSFMLEvents();
 
