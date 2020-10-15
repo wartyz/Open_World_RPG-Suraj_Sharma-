@@ -8,7 +8,7 @@ find_package(OpenGL REQUIRED)
 set(SFML_INCLUDE_PATH h:/ProyectosCLion/__LIBRERIAS__/SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit/include)
 set(SFML_LIBRARY_PATH h:/ProyectosCLion/__LIBRERIAS__/SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit/lib)
 
-set(SOURCE_FILES main.cpp Game.cpp Game.hpp State.cpp State.hpp)
+set(SOURCE_FILES main.cpp Game.cpp Game.hpp State.cpp State.hpp States/GameState.cpp States/GameState.hpp)
 
 include_directories(
         ${SFML_INCLUDE_PATH}

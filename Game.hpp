@@ -1,6 +1,6 @@
 #pragma once
 
-#include "State.hpp"
+#include "States/GameState.hpp"
 
 class Game
 {
@@ -12,8 +12,12 @@ private:
     sf::Clock dtClock;
     float dt; //Delta Time
 
-    //Initializacion
+    std::stack<State *> states; // Pila de punteros a estados
+
+    //Inicializacion
     void initWindow();
+
+    void initStates();
 
 public:
     //Constructores/Destructores
