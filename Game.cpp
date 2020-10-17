@@ -27,19 +27,18 @@ void Game::initWindow()
     this->window->setFramerateLimit(framerate_limit);
     this->window->setVerticalSyncEnabled(vertical_sync_enabled);
 }
-//Constructors/Destructors
-
-Game::Game()
-{
-    this->initWindow();
-    this->initStates();
-}
 
 void Game::initStates()
 {
     this->states.push(new GameState(this->window));
 }
 
+//Constructores/Destructores
+Game::Game()
+{
+    this->initWindow();
+    this->initStates();
+}
 
 Game::~Game()
 {
@@ -53,6 +52,18 @@ Game::~Game()
 }
 
 // Funciones
+
+void Game::endApplication()
+{
+    std::cout << "Acabando aplicacion" << "\n";
+}
+
+void Game::updateDt()
+{
+    /*Actualiza la variable dt con el tiempo que toma hacer update y render en un frame*/
+    this->dt = this->dtClock.restart().asSeconds();
+}
+
 void Game::updateSFMLEvents()
 {
     while (this->window->pollEvent(this->sfEvent))
@@ -69,7 +80,22 @@ void Game::update()
     this->updateSFMLEvents();
 
     if (!this->states.empty())
+    {
         this->states.top()->update(this->dt);
+
+        if (this->states.top()->getQuit())
+        {
+            this->states.top()->endState();
+            delete this->states.top();
+            this->states.pop();
+        }
+    }
+        // Final de la aplicación
+    else
+    {
+        this->endApplication();
+        this->window->close();
+    }
 }
 
 void Game::render()
@@ -93,9 +119,7 @@ void Game::run()
     }
 }
 
-void Game::updateDt()
-{
-    /*Actualiza la variable dt con el tiempo que toma hacer update y render en un frame*/
-    this->dt = this->dtClock.restart().asSeconds();
-}
+
+
+
 
